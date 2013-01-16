@@ -1,0 +1,13 @@
+*.sdf
+*.suo
+*.user
+*.opensdf
+thirdparty/*
+Release/*
+Release DLL/*
+Debug/*
+Debug DLL/*
+*/Release/*
+*/Release DLL/*
+*/Debug/*
+*/Debug DLL/*

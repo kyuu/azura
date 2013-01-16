@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jaricom.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jutils.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jcapimin.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jcapistd.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jcarith.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jccoefct.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jccolor.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jcdctmgr.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jchuff.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jcinit.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jcmainct.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jcmarker.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jcmaster.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jcomapi.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jcparam.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jcprepct.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jcsample.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jctrans.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jdapimin.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jdapistd.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jdarith.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jdatadst.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jdatasrc.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jdcoefct.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jdcolor.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jddctmgr.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jdhuff.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jdinput.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jdmainct.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jdmarker.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jdmaster.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jdmerge.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jdpostct.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jdsample.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jdtrans.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jerror.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jfdctflt.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jfdctfst.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jfdctint.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jidctflt.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jidctfst.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jidctint.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jmemmgr.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jmemnobs.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jquant1.c" />
+    <ClCompile Include="..\..\..\thirdparty\libjpeg-8d\jquant2.c" />
+  </ItemGroup>
+</Project>

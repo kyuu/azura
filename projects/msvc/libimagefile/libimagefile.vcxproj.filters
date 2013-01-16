@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="bmp">
+      <UniqueIdentifier>{b6f6cea2-61e2-44e4-ad2a-b8b820330284}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="jpeg">
+      <UniqueIdentifier>{7cfd48d0-8651-4c6c-bd91-3164ef023b2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="png">
+      <UniqueIdentifier>{26224b25-3645-4b38-9dd4-b51fc6a328e7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\bmp\bmp.cpp">
+      <Filter>bmp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\jpeg\jpeg.cpp">
+      <Filter>jpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\png\png.cpp">
+      <Filter>png</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\libimagefile.cpp" />
+    <ClCompile Include="..\..\..\source\BlobImpl.cpp" />
+    <ClCompile Include="..\..\..\source\DataStreamImpl.cpp" />
+    <ClCompile Include="..\..\..\source\FileImpl.cpp" />
+    <ClCompile Include="..\..\..\source\ImageImpl.cpp" />
+  </ItemGroup>
+</Project>
