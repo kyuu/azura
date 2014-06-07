@@ -24,6 +24,7 @@
 
 #include <cassert>
 #include <csetjmp>
+#include <cstring>
 #include <png.h>
 
 #include "../ArrayAutoPtr.hpp"
@@ -72,6 +73,8 @@ namespace azura {
             return 0;
         }
 
+        // libpng uses SJLJ for error handling, so we need to define
+        // any automatic variables before the call to setjmp()
         Image::Ptr image;
         ArrayAutoPtr<png_bytep> rows;
 
@@ -91,10 +94,10 @@ namespace azura {
         png_read_info(png_ptr, info_ptr);
 
         // get the image attributes
-        u32 img_width      = png_get_image_width(png_ptr, info_ptr);
-        u32 img_height     = png_get_image_height(png_ptr, info_ptr);
-        u32 img_bit_depth  = png_get_bit_depth(png_ptr, info_ptr);
-        u32 img_color_type = png_get_color_type(png_ptr, info_ptr);
+        int img_width      = png_get_image_width(png_ptr, info_ptr);
+        int img_height     = png_get_image_height(png_ptr, info_ptr);
+        int img_bit_depth  = png_get_bit_depth(png_ptr, info_ptr);
+        int img_color_type = png_get_color_type(png_ptr, info_ptr);
 
         // if the color channel bit depth is 16 bit, strip it to 8 bit
         if (img_bit_depth == 16) {
@@ -106,34 +109,54 @@ namespace azura {
             png_set_tRNS_to_alpha(png_ptr);
         }
 
-        // expand any color type other than RGBA to RGBA
-        switch (img_color_type) {
-        case PNG_COLOR_TYPE_PALETTE:
-            png_set_palette_to_rgb(png_ptr);
-            png_set_add_alpha(png_ptr, 255, PNG_FILLER_AFTER);
-            break;
-        case PNG_COLOR_TYPE_GRAY:
-            png_set_gray_to_rgb(png_ptr);
-            png_set_add_alpha(png_ptr, 255, PNG_FILLER_AFTER);
-            break;
-        case PNG_COLOR_TYPE_GRAY_ALPHA:
-            png_set_gray_to_rgb(png_ptr);
-            break;
-        case PNG_COLOR_TYPE_RGB:
-            png_set_add_alpha(png_ptr, 255, PNG_FILLER_AFTER);
-            break;
-        case PNG_COLOR_TYPE_RGB_ALPHA:
-            /* that's what we want */
-            break;
+        switch (img_color_type)
+        {
+            case PNG_COLOR_TYPE_PALETTE:
+            {
+                image = new ImageImpl(img_width, img_height, PixelFormat::RGB_P8);
+
+                // get palette
+                png_colorp palette = 0;
+                int num_palette = 0;
+                png_get_PLTE(png_ptr, info_ptr, &palette, &num_palette);
+
+                // copy palette over to image
+                std::memcpy(image->getPalette(), palette, num_palette * sizeof(RGB));
+
+                break;
+            }
+            case PNG_COLOR_TYPE_GRAY:
+            {
+                png_set_gray_to_rgb(png_ptr);
+                image = new ImageImpl(img_width, img_height, PixelFormat::RGB);
+                break;
+            }
+            case PNG_COLOR_TYPE_GRAY_ALPHA:
+            {
+                png_set_gray_to_rgb(png_ptr);
+                image = new ImageImpl(img_width, img_height, PixelFormat::RGBA);
+                break;
+            }
+            case PNG_COLOR_TYPE_RGB:
+            {
+                image = new ImageImpl(img_width, img_height, PixelFormat::RGB);
+                break;
+            }
+            case PNG_COLOR_TYPE_RGB_ALPHA:
+            {
+                image = new ImageImpl(img_width, img_height, PixelFormat::RGBA);
+                break;
+            }
+            default: // shouldn't happen
+                png_destroy_read_struct(&png_ptr, &info_ptr, 0);
+                return 0;
         }
 
-        // allocate the image
-        image = new ImageImpl(img_width, img_height, PixelFormat::RGBA);
-
         // prepare an array of row pointers for libpng
+        PixelFormatDescriptor pfd = Image::GetPixelFormatDescriptor(image->getPixelFormat());
         rows = new png_bytep[img_height];
-        for (u32 i = 0; i < img_height; ++i) {
-            rows[i] = (png_bytep)(image->getPixels() + i * img_width * 4 /* size of RGBA */ );
+        for (int i = 0; i < img_height; ++i) {
+            rows[i] = (png_bytep)(image->getPixels() + i * img_width * pfd.bytesPerPixel);
         }
 
         // read the image data
@@ -179,15 +202,22 @@ namespace azura {
 
         Image::Ptr src_image = image;
 
-        // ensure that the image pixels have the R8G8B8A8 format
-        if (src_image->getPixelFormat() != PixelFormat::RGB_P8 &&
-            src_image->getPixelFormat() != PixelFormat::RGB &&
-            src_image->getPixelFormat() != PixelFormat::RGBA)
-        {
-            src_image = src_image->convert(PixelFormat::RGBA);
-            if (!src_image) {
+        switch (src_image->getPixelFormat()) {
+            case PixelFormat::RGB_P8:
+            case PixelFormat::RGB:
+            case PixelFormat::RGBA:
+                // ok, we can handle these directly
+                break;
+            case PixelFormat::BGR:
+                // convert to RGB
+                src_image = src_image->convert(PixelFormat::RGB);
+                break;
+            case PixelFormat::BGRA:
+                // convert to RGBA
+                src_image = src_image->convert(PixelFormat::RGBA);
+                break;
+            default: // shouldn't happen
                 return false;
-            }
         }
 
         // initialize the necessary libpng data structures
@@ -201,6 +231,8 @@ namespace azura {
             return false;
         }
 
+        // libpng uses SJLJ for error handling, so we need to define
+        // any automatic variables before the call to setjmp()
         ArrayAutoPtr<png_bytep> rows;
 
         // establish a return point
@@ -213,54 +245,69 @@ namespace azura {
         png_set_write_fn(png_ptr, file, write_callback, flush_callback);
 
         // set the image attributes
-        if (src_image->getPixelFormat() == PixelFormat::RGB_P8) {
-            png_set_IHDR(
-                png_ptr,
-                info_ptr,
-                src_image->getWidth(),
-                src_image->getHeight(),
-                8, /* 8 bits per channel */
-                PNG_COLOR_TYPE_PALETTE,
-                PNG_INTERLACE_NONE,
-                PNG_COMPRESSION_TYPE_DEFAULT,
-                PNG_FILTER_TYPE_DEFAULT
-            );
-        } else if (src_image->getPixelFormat() == PixelFormat::RGB) {
-            png_set_IHDR(
-                png_ptr,
-                info_ptr,
-                src_image->getWidth(),
-                src_image->getHeight(),
-                8, /* 8 bits per channel */
-                PNG_COLOR_TYPE_RGB,
-                PNG_INTERLACE_NONE,
-                PNG_COMPRESSION_TYPE_DEFAULT,
-                PNG_FILTER_TYPE_DEFAULT
-            );
-        } else { // RGBA
-            png_set_IHDR(
-                png_ptr,
-                info_ptr,
-                src_image->getWidth(),
-                src_image->getHeight(),
-                8, /* 8 bits per channel */
-                PNG_COLOR_TYPE_RGB_ALPHA,
-                PNG_INTERLACE_NONE,
-                PNG_COMPRESSION_TYPE_DEFAULT,
-                PNG_FILTER_TYPE_DEFAULT
-            );
-        }
-
-        if (src_image->getPixelFormat() == PixelFormat::RGB_P8) {
-            png_set_PLTE(png_ptr, info_ptr, (png_colorp)src_image->getPalette(), 256);
+        switch (src_image->getPixelFormat())
+        {
+            case PixelFormat::RGB_P8:
+            {
+                png_set_IHDR(
+                    png_ptr,
+                    info_ptr,
+                    src_image->getWidth(),
+                    src_image->getHeight(),
+                    8, /* 8 bits per channel */
+                    PNG_COLOR_TYPE_PALETTE,
+                    PNG_INTERLACE_NONE,
+                    PNG_COMPRESSION_TYPE_DEFAULT,
+                    PNG_FILTER_TYPE_DEFAULT
+                );
+                png_set_PLTE(
+                    png_ptr,
+                    info_ptr,
+                    (png_colorp)src_image->getPalette(),
+                    256 /* size of palette */
+                );
+                break;
+            }
+            case PixelFormat::RGB:
+            {
+                png_set_IHDR(
+                    png_ptr,
+                    info_ptr,
+                    src_image->getWidth(),
+                    src_image->getHeight(),
+                    8, /* 8 bits per channel */
+                    PNG_COLOR_TYPE_RGB,
+                    PNG_INTERLACE_NONE,
+                    PNG_COMPRESSION_TYPE_DEFAULT,
+                    PNG_FILTER_TYPE_DEFAULT
+                );
+                break;
+            }
+            case PixelFormat::RGBA:
+            {
+                png_set_IHDR(
+                    png_ptr,
+                    info_ptr,
+                    src_image->getWidth(),
+                    src_image->getHeight(),
+                    8, /* 8 bits per channel */
+                    PNG_COLOR_TYPE_RGB_ALPHA,
+                    PNG_INTERLACE_NONE,
+                    PNG_COMPRESSION_TYPE_DEFAULT,
+                    PNG_FILTER_TYPE_DEFAULT
+                );
+                break;
+            }
+            default: // shouldn't happen
+                png_destroy_write_struct(&png_ptr, &info_ptr);
+                return false;
         }
 
         // write png header
         png_write_info(png_ptr, info_ptr);
 
-        PixelFormatDescriptor pfd = Image::GetPixelFormatDescriptor(src_image->getPixelFormat());
-
         // prepare an array of row pointers for libpng
+        PixelFormatDescriptor pfd = Image::GetPixelFormatDescriptor(src_image->getPixelFormat());
         rows = new png_bytep[src_image->getHeight()];
         for (int i = 0; i < src_image->getHeight(); ++i) {
             rows[i] = (png_bytep)(src_image->getPixels() + i * src_image->getWidth() * pfd.bytesPerPixel);
