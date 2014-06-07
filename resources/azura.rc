@@ -1,0 +1,36 @@
+#include <winver.h>
+#include "../source/version.hpp"
+
+VS_VERSION_INFO     VERSIONINFO
+FILEVERSION         AZURA_VERSION_MAJOR,AZURA_VERSION_MINOR,AZURA_VERSION_RELEASE,0
+PRODUCTVERSION      AZURA_VERSION_MAJOR,AZURA_VERSION_MINOR,AZURA_VERSION_RELEASE,0
+FILEFLAGSMASK       VS_FFI_FILEFLAGSMASK
+#ifdef _DEBUG
+FILEFLAGS           1
+#else
+FILEFLAGS           0
+#endif
+FILEOS              VOS__WINDOWS32
+FILETYPE            VFT_DLL
+FILESUBTYPE         0	// not used
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904E4"
+    //language ID = U.S. English, char set = Windows, Multilingual
+    BEGIN
+      VALUE "FileDescription",	"Azura Image I/O Library\0"
+      VALUE "FileVersion",      AZURA_VERSION_STRING "\0"
+      VALUE "InternalName",     "azura.dll\0"
+      VALUE "LegalCopyright",	"(C) 2013-2014 Anatoli Steinmark\0"
+      VALUE "OriginalFilename",	"azura.dll\0"
+      VALUE "ProductName",	    "Azura\0"
+      VALUE "ProductVersion",	AZURA_VERSION_STRING "\0"
+      VALUE "Comments",		    "For more information visit https://github.com/kyuu/azura/\0"
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x0409, 1252
+  END
+END

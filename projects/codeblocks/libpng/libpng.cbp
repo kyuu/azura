@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="libpng" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../../../build/libpng.a" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="obj/Debug/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="../../../build/libpng.a" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="obj/Release/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add directory="../../../thirdparty/zlib-1.2.8" />
+		</Compiler>
+		<Linker>
+			<Add library="zlib" />
+			<Add directory="../../../build" />
+		</Linker>
+		<Unit filename="../../../thirdparty/libpng/png.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../thirdparty/libpng/pngerror.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../thirdparty/libpng/pngget.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../thirdparty/libpng/pngmem.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../thirdparty/libpng/pngpread.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../thirdparty/libpng/pngread.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../thirdparty/libpng/pngrio.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../thirdparty/libpng/pngrtran.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../thirdparty/libpng/pngrutil.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../thirdparty/libpng/pngset.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../thirdparty/libpng/pngtrans.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../thirdparty/libpng/pngwio.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../thirdparty/libpng/pngwrite.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../thirdparty/libpng/pngwtran.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../thirdparty/libpng/pngwutil.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

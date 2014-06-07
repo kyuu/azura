@@ -1,12 +1,8 @@
+*.opensdf
 *.sdf
 *.suo
 *.user
-*.opensdf
-thirdparty/*
-Release/*
-Release DLL/*
-Debug/*
-Debug DLL/*
+ipch/*
 */Release/*
 */Release DLL/*
 */Debug/*

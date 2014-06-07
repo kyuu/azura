@@ -1,22 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug DLL|Win32">
-      <Configuration>Debug DLL</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release DLL|Win32">
-      <Configuration>Release DLL</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\thirdparty\zlib\adler32.c" />
+    <ClCompile Include="..\..\..\thirdparty\zlib\compress.c" />
+    <ClCompile Include="..\..\..\thirdparty\zlib\crc32.c" />
+    <ClCompile Include="..\..\..\thirdparty\zlib\deflate.c" />
+    <ClCompile Include="..\..\..\thirdparty\zlib\gzclose.c" />
+    <ClCompile Include="..\..\..\thirdparty\zlib\gzlib.c" />
+    <ClCompile Include="..\..\..\thirdparty\zlib\gzread.c" />
+    <ClCompile Include="..\..\..\thirdparty\zlib\gzwrite.c" />
+    <ClCompile Include="..\..\..\thirdparty\zlib\infback.c" />
+    <ClCompile Include="..\..\..\thirdparty\zlib\inffast.c" />
+    <ClCompile Include="..\..\..\thirdparty\zlib\inflate.c" />
+    <ClCompile Include="..\..\..\thirdparty\zlib\inftrees.c" />
+    <ClCompile Include="..\..\..\thirdparty\zlib\trees.c" />
+    <ClCompile Include="..\..\..\thirdparty\zlib\uncompr.c" />
+    <ClCompile Include="..\..\..\thirdparty\zlib\zutil.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CDFE4CBF-0B80-4373-A13E-8E8526AD2E7F}</ProjectGuid>
@@ -28,19 +37,8 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug DLL|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release DLL|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
@@ -51,17 +49,16 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug DLL|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release DLL|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -73,20 +70,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <OutputFile>$(ProjectDir)..\thirdparty\zlib.lib</OutputFile>
+      <OutputFile>$(ProjectDir)..\..\..\build\zlib.lib</OutputFile>
     </Lib>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug DLL|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>ZLIB_DLL;_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalOptions>/wd4996 %(AdditionalOptions)</AdditionalOptions>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <OutputFile>$(ProjectDir)..\thirdparty\zlib.dll</OutputFile>
-    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -103,42 +88,9 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <OutputFile>$(ProjectDir)..\thirdparty\zlib.lib</OutputFile>
+      <OutputFile>$(ProjectDir)..\..\..\build\zlib.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release DLL|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>ZLIB_DLL;NDEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalOptions>/wd4996 %(AdditionalOptions)</AdditionalOptions>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <OutputFile>$(ProjectDir)..\thirdparty\zlib.dll</OutputFile>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\thirdparty\zlib-1.2.7\adler32.c" />
-    <ClCompile Include="..\..\..\thirdparty\zlib-1.2.7\compress.c" />
-    <ClCompile Include="..\..\..\thirdparty\zlib-1.2.7\crc32.c" />
-    <ClCompile Include="..\..\..\thirdparty\zlib-1.2.7\deflate.c" />
-    <ClCompile Include="..\..\..\thirdparty\zlib-1.2.7\gzclose.c" />
-    <ClCompile Include="..\..\..\thirdparty\zlib-1.2.7\gzlib.c" />
-    <ClCompile Include="..\..\..\thirdparty\zlib-1.2.7\gzread.c" />
-    <ClCompile Include="..\..\..\thirdparty\zlib-1.2.7\gzwrite.c" />
-    <ClCompile Include="..\..\..\thirdparty\zlib-1.2.7\infback.c" />
-    <ClCompile Include="..\..\..\thirdparty\zlib-1.2.7\inffast.c" />
-    <ClCompile Include="..\..\..\thirdparty\zlib-1.2.7\inflate.c" />
-    <ClCompile Include="..\..\..\thirdparty\zlib-1.2.7\inftrees.c" />
-    <ClCompile Include="..\..\..\thirdparty\zlib-1.2.7\trees.c" />
-    <ClCompile Include="..\..\..\thirdparty\zlib-1.2.7\uncompr.c" />
-    <ClCompile Include="..\..\..\thirdparty\zlib-1.2.7\zutil.c" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

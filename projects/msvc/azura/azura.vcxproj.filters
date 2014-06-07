@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="..\..\..\source\azura.hpp" />
+    <ClInclude Include="..\..\..\source\color.hpp" />
+    <ClInclude Include="..\..\..\source\File.hpp" />
+    <ClInclude Include="..\..\..\source\Image.hpp" />
+    <ClInclude Include="..\..\..\source\MemoryFile.hpp" />
+    <ClInclude Include="..\..\..\source\platform.hpp" />
+    <ClInclude Include="..\..\..\source\RefCounted.hpp" />
+    <ClInclude Include="..\..\..\source\RefPtr.hpp" />
+    <ClInclude Include="..\..\..\source\types.hpp" />
+    <ClInclude Include="..\..\..\source\version.hpp" />
+    <ClInclude Include="..\..\..\source\detail\ArrayAutoPtr.hpp">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\detail\ByteArray.hpp">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\detail\DataStream.hpp">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\detail\FileImpl.hpp">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\detail\ImageImpl.hpp">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\detail\MemoryFileImpl.hpp">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\detail\octreequant.hpp">
+      <Filter>detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\detail\bmp\bmp.hpp">
+      <Filter>detail\bmp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\detail\jpeg\jpeg.hpp">
+      <Filter>detail\jpeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\source\detail\png\png.hpp">
+      <Filter>detail\png</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="detail">
+      <UniqueIdentifier>{ce24b694-97ff-4816-965b-711b8eb40f70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="detail\bmp">
+      <UniqueIdentifier>{dff20359-9a11-4493-88ae-98815757b637}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="detail\png">
+      <UniqueIdentifier>{d964426c-5bb3-46f5-b938-a4d7247daa5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="detail\jpeg">
+      <UniqueIdentifier>{a2b35db8-eba0-4d6c-9fdc-1cc9b0c3a387}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\source\detail\azura.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\detail\ByteArray.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\detail\DataStream.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\detail\FileImpl.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\detail\Image.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\detail\ImageImpl.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\detail\MemoryFileImpl.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\detail\octreequant.cpp">
+      <Filter>detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\detail\bmp\bmp.cpp">
+      <Filter>detail\bmp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\detail\jpeg\jpeg.cpp">
+      <Filter>detail\jpeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\source\detail\png\png.cpp">
+      <Filter>detail\png</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\resources\azura.rc" />
+  </ItemGroup>
+</Project>

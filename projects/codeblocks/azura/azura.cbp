@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="azura" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../../../build/azura.dll" imp_lib="../../../build/azura.a" def_file="../../../build/azura.def" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/Debug/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-DBUILD_DLL" />
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="user32" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="../../../build/azura.dll" imp_lib="../../../build/azura.a" def_file="../../../build/azura.def" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/Release/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-DBUILD_DLL" />
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="user32" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-DAZURA_DLL" />
+			<Add option="-DBUILDING_AZURA" />
+			<Add directory="../../../thirdparty/libpng" />
+			<Add directory="../../../thirdparty/libjpeg" />
+		</Compiler>
+		<Linker>
+			<Add library="png" />
+			<Add library="jpeg" />
+			<Add library="z" />
+			<Add directory="../../../build" />
+		</Linker>
+		<Unit filename="../../../resources/azura.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="../../../source/File.hpp" />
+		<Unit filename="../../../source/Image.hpp" />
+		<Unit filename="../../../source/MemoryFile.hpp" />
+		<Unit filename="../../../source/RefCounted.hpp" />
+		<Unit filename="../../../source/RefPtr.hpp" />
+		<Unit filename="../../../source/azura.hpp" />
+		<Unit filename="../../../source/color.hpp" />
+		<Unit filename="../../../source/detail/ArrayAutoPtr.hpp" />
+		<Unit filename="../../../source/detail/ByteArray.cpp" />
+		<Unit filename="../../../source/detail/ByteArray.hpp" />
+		<Unit filename="../../../source/detail/DataStream.cpp" />
+		<Unit filename="../../../source/detail/DataStream.hpp" />
+		<Unit filename="../../../source/detail/FileImpl.cpp" />
+		<Unit filename="../../../source/detail/FileImpl.hpp" />
+		<Unit filename="../../../source/detail/Image.cpp" />
+		<Unit filename="../../../source/detail/ImageImpl.cpp" />
+		<Unit filename="../../../source/detail/ImageImpl.hpp" />
+		<Unit filename="../../../source/detail/MemoryFileImpl.cpp" />
+		<Unit filename="../../../source/detail/MemoryFileImpl.hpp" />
+		<Unit filename="../../../source/detail/azura.cpp" />
+		<Unit filename="../../../source/detail/bmp/bmp.cpp" />
+		<Unit filename="../../../source/detail/bmp/bmp.hpp" />
+		<Unit filename="../../../source/detail/jpeg/jpeg.cpp" />
+		<Unit filename="../../../source/detail/jpeg/jpeg.hpp" />
+		<Unit filename="../../../source/detail/octreequant.cpp" />
+		<Unit filename="../../../source/detail/octreequant.hpp" />
+		<Unit filename="../../../source/detail/png/png.cpp" />
+		<Unit filename="../../../source/detail/png/png.hpp" />
+		<Unit filename="../../../source/platform.hpp" />
+		<Unit filename="../../../source/types.hpp" />
+		<Unit filename="../../../source/version.hpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

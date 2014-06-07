@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="Workspace">
+		<Project filename="azura/azura.cbp">
+			<Depends filename="libjpeg/libjpeg.cbp" />
+			<Depends filename="libpng/libpng.cbp" />
+		</Project>
+		<Project filename="libjpeg/libjpeg.cbp" />
+		<Project filename="libpng/libpng.cbp">
+			<Depends filename="zlib/zlib.cbp" />
+		</Project>
+		<Project filename="zlib/zlib.cbp" />
+	</Workspace>
+</CodeBlocks_workspace_file>
