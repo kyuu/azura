@@ -362,7 +362,7 @@ namespace azura {
 
         Image::Ptr src_image = image;
 
-        // ensure that the image pixels have the B8G8R8 format
+        // we currently support only BGR
         if (src_image->getPixelFormat() != PixelFormat::BGR) {
             src_image = src_image->convert(PixelFormat::BGR);
             if (!src_image) {

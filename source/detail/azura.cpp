@@ -45,7 +45,7 @@ namespace azura {
             FileFormat::Enum fileFormat;
         };
 
-        FileExtension FileExtensions[] = {
+        FileExtension KnownFileExtensions[] = {
             { "bmp",    FileFormat::BMP  },
             { "dib",    FileFormat::BMP  },
             { "png",    FileFormat::PNG  },
@@ -84,9 +84,9 @@ namespace azura {
         }
 
         std::string ext = filename.substr(dot_pos + 1);
-        for (int i = 0; !FileExtensions[i].name.empty(); i++) {
-            if (ext == FileExtensions[i].name) {
-                return FileExtensions[i].fileFormat;
+        for (int i = 0; !KnownFileExtensions[i].name.empty(); i++) {
+            if (ext == KnownFileExtensions[i].name) {
+                return KnownFileExtensions[i].fileFormat;
             }
         }
 
@@ -134,7 +134,7 @@ namespace azura {
     //--------------------------------------------------------------
     Image::Ptr ReadImage(File* file, FileFormat::Enum ff, PixelFormat::Enum pf)
     {
-        if (!file || pf == PixelFormat::Unknown) {
+        if (!file || (pf != PixelFormat::DontCare && pf < 0)) {
             return 0;
         }
 
@@ -142,21 +142,26 @@ namespace azura {
 
         switch (ff)
         {
-            case FileFormat::BMP: {
+            case FileFormat::BMP:
+            {
                 image = ReadBMP(file);
                 break;
             }
-            case FileFormat::PNG: {
+            case FileFormat::PNG:
+            {
                 image = ReadPNG(file);
                 break;
             }
-            case FileFormat::JPEG: {
+            case FileFormat::JPEG:
+            {
                 image = ReadJPEG(file);
                 break;
             }
-            case FileFormat::AutoDetect: {
+            case FileFormat::AutoDetect:
+            {
                 int initial_pos = file->tell();
 
+                // try reading as BMP
                 image = ReadBMP(file);
                 if (image) {
                     break;
@@ -164,6 +169,7 @@ namespace azura {
 
                 file->seek(initial_pos);
 
+                // try reading as PNG
                 image = ReadPNG(file);
                 if (image) {
                     break;
@@ -171,6 +177,7 @@ namespace azura {
 
                 file->seek(initial_pos);
 
+                // try reading as JPEG
                 image = ReadJPEG(file);
 
                 break;
@@ -179,7 +186,7 @@ namespace azura {
                 return 0;
         }
 
-        if (pf != PixelFormat::DontCare && image && image->getPixelFormat() != pf) {
+        if (image && pf != PixelFormat::DontCare && image->getPixelFormat() != pf) {
             image = image->convert(pf);
         }
 
@@ -227,20 +234,20 @@ namespace azura {
     //--------------------------------------------------------------
     bool WriteImage(Image* image, const std::string& filename, FileFormat::Enum ff)
     {
-        if (!image) {
-            return 0;
+        if (!image || filename.empty()) {
+            return false;
         }
 
         File::Ptr file = OpenFile(filename, File::Out);
 
         if (!file) {
-            return 0;
+            return false;
         }
 
         if (ff == FileFormat::AutoDetect) {
             ff = GetFileFormat(filename);
             if (ff == FileFormat::Unknown) {
-                return 0;
+                return false;
             }
         }
 

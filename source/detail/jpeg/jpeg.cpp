@@ -295,7 +295,7 @@ namespace azura {
 
         Image::Ptr src_image = image;
 
-        // ensure that the image pixels have the R8G8B8 format
+        // libjpeg supports only RGB
         if (src_image->getPixelFormat() != PixelFormat::RGB) {
             src_image = src_image->convert(PixelFormat::RGB);
             if (!src_image) {
