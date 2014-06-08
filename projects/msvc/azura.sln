@@ -17,6 +17,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libpng", "libpng\libpng.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zlib", "zlib\zlib.vcxproj", "{CDFE4CBF-0B80-4373-A13E-8E8526AD2E7F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{3CCA3415-EC84-4D06-86E6-AA3F4C1D7A0C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{05EB964C-B9EB-425D-8BE3-7A30A303609F} = {05EB964C-B9EB-425D-8BE3-7A30A303609F}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug DLL|Win32 = Debug DLL|Win32
@@ -57,6 +62,14 @@ Global
 		{CDFE4CBF-0B80-4373-A13E-8E8526AD2E7F}.Release DLL|Win32.Build.0 = Release|Win32
 		{CDFE4CBF-0B80-4373-A13E-8E8526AD2E7F}.Release|Win32.ActiveCfg = Release|Win32
 		{CDFE4CBF-0B80-4373-A13E-8E8526AD2E7F}.Release|Win32.Build.0 = Release|Win32
+		{3CCA3415-EC84-4D06-86E6-AA3F4C1D7A0C}.Debug DLL|Win32.ActiveCfg = Debug|Win32
+		{3CCA3415-EC84-4D06-86E6-AA3F4C1D7A0C}.Debug DLL|Win32.Build.0 = Debug|Win32
+		{3CCA3415-EC84-4D06-86E6-AA3F4C1D7A0C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3CCA3415-EC84-4D06-86E6-AA3F4C1D7A0C}.Debug|Win32.Build.0 = Debug|Win32
+		{3CCA3415-EC84-4D06-86E6-AA3F4C1D7A0C}.Release DLL|Win32.ActiveCfg = Release|Win32
+		{3CCA3415-EC84-4D06-86E6-AA3F4C1D7A0C}.Release DLL|Win32.Build.0 = Release|Win32
+		{3CCA3415-EC84-4D06-86E6-AA3F4C1D7A0C}.Release|Win32.ActiveCfg = Release|Win32
+		{3CCA3415-EC84-4D06-86E6-AA3F4C1D7A0C}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

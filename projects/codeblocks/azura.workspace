@@ -10,5 +10,8 @@
 			<Depends filename="zlib/zlib.cbp" />
 		</Project>
 		<Project filename="zlib/zlib.cbp" />
+		<Project filename="test/test.cbp">
+			<Depends filename="azura/azura.cbp" />
+		</Project>
 	</Workspace>
 </CodeBlocks_workspace_file>
