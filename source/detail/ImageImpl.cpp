@@ -46,9 +46,11 @@ namespace azura {
         PixelFormatDescriptor pfd = GetPixelFormatDescriptor(pf);
 
         _pixels = new u8[width * height * pfd.bytesPerPixel];
+        std::memset(_pixels, 0x00, width * height * pfd.bytesPerPixel);
 
         if (!pfd.isDirectColor) {
             _palette = new RGB[256];
+            std::memset(_palette, 0x00, 256 * sizeof(RGB));
         }
     }
 
