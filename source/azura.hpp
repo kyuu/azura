@@ -58,7 +58,7 @@ namespace azura {
 
     AZURAAPI MemoryFile::Ptr CreateMemoryFile(const u8* buffer, int size);
 
-    AZURAAPI Image::Ptr CreateImage(int width, int height, PixelFormat::Enum pf, const u8* pixels = 0, const u8* palette = 0);
+    AZURAAPI Image::Ptr CreateImage(int width, int height, PixelFormat::Enum pf, const u8* pixels = 0, const RGB palette[256] = 0);
 
     AZURAAPI Image::Ptr ReadImage(File* file, FileFormat::Enum ff = FileFormat::AutoDetect, PixelFormat::Enum pf = PixelFormat::DontCare);
 
