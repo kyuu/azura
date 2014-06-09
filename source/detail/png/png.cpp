@@ -104,10 +104,11 @@ namespace azura {
             png_set_strip_16(png_ptr);
         }
 
+        // Note: Not sure if we need this, or if it's correct what we are doing here.
         // if the image has a tRNS chunk, use it for the alpha channel
-        if (png_get_valid(png_ptr, info_ptr, PNG_INFO_tRNS)) {
-            png_set_tRNS_to_alpha(png_ptr);
-        }
+        //if (png_get_valid(png_ptr, info_ptr, PNG_INFO_tRNS)) {
+        //    png_set_tRNS_to_alpha(png_ptr);
+        //}
 
         switch (img_color_type)
         {
